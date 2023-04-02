@@ -28,7 +28,17 @@ class ContaCorrente():
 
     #Sacar credito na conta
     def saque(self, dinheiro_a_menos):
-        self.saldo = self.saldo - dinheiro_a_menos 
+        if self.saldo < dinheiro_a_menos:
+            limpar_tela()
+            print("---SALDO INDISPONIVEL----")
+            sleep(2)
+            limpar_tela()
+        else:
+            self.saldo = self.saldo - dinheiro_a_menos 
+            limpar_tela()
+            print("---SAQUE FEITO COM SUCESSO---")
+            sleep(2)
+            limpar_tela()
 
 #input de infomacoes principais    
 system("cls")
@@ -63,6 +73,7 @@ while True:
     if acao == 1:#acao para mudar o nome da conta
         global novo_nome 
         novo_nome = input("novo nome: ") 
+        novo_nome = novo_nome.capitalize()
         conta.alterar_nome(novo_nome)
         limpar_tela()
         print("---NOME MUDADO COM SUCESSO---")
@@ -87,11 +98,6 @@ while True:
         global dinheiro_a_menos 
         dinheiro_a_menos = float(input("Quantia: "))
         conta.saque(dinheiro_a_menos)
-        limpar_tela()
-        linhas()
-        print("---SAQUE FEITO COM SUCESSO---")
-        linhas()
-        sleep(2)
         limpar_tela()
 
     elif acao == 4:#exibir todas as informacoes do usuario
